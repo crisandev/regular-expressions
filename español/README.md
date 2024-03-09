@@ -41,6 +41,117 @@ if (telefonoRegex.test(numeroTelefono)) {
 }
 ```
 
+### Formación de Expresiones Regulares
+
+Las expresiones regulares se forman utilizando una combinación de caracteres literales y metacaracteres que representan patrones de búsqueda. Aquí tienes una explicación detallada de cómo se forman y las reglas que siguen:
+
+1. **Caracteres Literales**: Los caracteres literales coinciden exactamente con ellos mismos en la cadena de texto. Por ejemplo, `abc` coincidirá exactamente con la secuencia de caracteres "abc".
+
+Por supuesto, aquí está el texto en formato Markdown sin enumeración y con el título comenzando en 2:
+
+2. **Metacaracteres en Expresiones Regulares**
+
+- **`.` (punto)**  
+Expresión Regular: `b.t`  
+Coincidencias: "bat", "bet", "bit", "bot", "but", pero no "b\nn" (debido a que el punto no coincide con saltos de línea).
+
+- **`^` (circunflejo)**  
+Expresión Regular: `^start`  
+Coincidencias: "start", "start of something", pero no "in the start".
+
+- **`$` (dólar)**  
+Expresión Regular: `end$`  
+Coincidencias: "end", "end of something", pero no "ending".
+
+- **`*`**  
+Expresión Regular: `go*gle`  
+Coincidencias: "ggle", "gogle", "google", pero no "gooooogle" (debido a que solo coincide con cero o más repeticiones de "o").
+
+- **`+`**  
+Expresión Regular: `go+gle`  
+Coincidencias: "gogle", "google", pero no "ggle" (debido a que al menos una "o" es necesaria).
+
+- **`?`**  
+Expresión Regular: `colou?r`  
+Coincidencias: "color", "colour", pero no "colouur" (debido a que la "u" es opcional).
+
+- **`\`**  
+Expresión Regular: `\.`  
+Coincidencias: ".", pero no "a" o cualquier otro carácter (debido a que el punto se ha escapado y ahora coincide literalmente con un punto).
+
+- **`|` (barra vertical)**  
+Expresión Regular: `cats|dogs`  
+Coincidencias: "cats", "dogs", pero no "birds" (debido a que solo coincide con "cats" o "dogs").
+
+- **`[]` (clase de caracteres)**  
+Expresión Regular: `[aeiou]`  
+Coincidencias: Cualquier vocal en minúscula.
+
+- **`()` (paréntesis)**  
+Expresión Regular: `(hello)+`  
+Coincidencias: "hello", "hellohello", "hellohellohello", etc.
+
+- **`{}` (cuantificador)**  
+Expresión Regular: `o{2}`  
+Coincidencias: "oo", pero no "o" o "ooo" (debido a que especifica exactamente dos repeticiones de "o").
+
+
+3. **Clases de Caracteres**: Permiten especificar un conjunto de caracteres que pueden coincidir en una posición determinada en la cadena. Por ejemplo, `[abc]` coincidirá con cualquiera de los caracteres "a", "b" o "c".
+
+4. **Cuantificadores**: Especifican cuántas veces debe aparecer un elemento en la cadena. Por ejemplo, `a{2,4}` coincidirá con "aa", "aaa" o "aaaa".
+
+5. **Agrupamiento**: Los paréntesis se utilizan para agrupar elementos y aplicar operadores a grupos de caracteres. Por ejemplo, `(ab)+` coincidirá con "ab", "abab", "ababab", etc.
+
+6. **Anclas**: Te permiten coincidir con el inicio o el final de una cadena. Por ejemplo, `^abc` coincidirá con "abc" solo si "abc" está al principio de la cadena.
+
+### Ejemplo
+
+La expresión regular `^\d{3}-\d{3}-\d{4}$` coincide con un número de teléfono en formato "###-###-####", donde cada "#" representa un dígito del 0 al 9. Aquí:
+- `^\d{3}`: Coincide con tres dígitos al inicio de la cadena.
+- `-`: Coincide con el guion literal entre los grupos de dígitos.
+- `\d{3}`: Coincide con otros tres dígitos.
+- `-`: Otro guion literal.
+- `\d{4}$`: Coincide con cuatro dígitos al final de la cadena.
+
+Espero que esta explicación te haya ayudado a comprender cómo se forman las expresiones regulares y las reglas que siguen.
+
+### Guía para Validar Direcciones de Correo Electrónico con Expresiones Regulares
+
+#### Paso 1: Definir el Patrón
+Para validar direcciones de correo electrónico, necesitamos un patrón que describa la estructura básica de una dirección de correo electrónico. El patrón general es `usuario@dominio.extensión`, donde `usuario`, `dominio` y `extensión` pueden contener letras, números, guiones y puntos.
+
+#### Paso 2: Utilizar Caracteres Literales
+Incluimos los caracteres literales "@" y "." en nuestro patrón, ya que son parte fundamental de una dirección de correo electrónico.
+
+#### Paso 3: Utilizar Metacaracteres para Patrones Más Complejos
+Utilizamos metacaracteres como `+`, `@`, y `\.` para representar patrones más complejos. Por ejemplo, `+` indica que el conjunto de caracteres alfanuméricos antes de "@" puede aparecer una o más veces, y `\.` coincide literalmente con el carácter ".".
+
+#### Paso 4: Prueba tu Expresión Regular
+Una vez que hemos construido nuestra expresión regular, la probamos con diferentes ejemplos de direcciones de correo electrónico para asegurarnos de que funcione correctamente.
+
+#### Paso 5: Ajustar y Refinar según sea Necesario
+Si la expresión regular no coincide con todas las instancias deseadas o coincide con demasiadas, ajustamos y refinamos el patrón según sea necesario. Por ejemplo, podemos agregar restricciones adicionales para validar ciertos caracteres en el usuario o la extensión del correo electrónico.
+
+#### Paso 6: Documentar tu Expresión Regular
+Finalmente, documentamos claramente en nuestro código el propósito de la expresión regular y cómo se espera que funcione. Esto facilitará su comprensión y mantenimiento para nosotros y otros desarrolladores que trabajen en el proyecto.
+
+---
+
+#### Expresión Regular Completa:
+```regex
+/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+```
+- `^`: Coincide con el inicio de la cadena.
+- `[a-zA-Z0-9._%+-]+`: Coincide con uno o más caracteres alfanuméricos, así como con algunos caracteres especiales como ".", "_", "%", "+", y "-". Esto representa el usuario en la dirección de correo electrónico.
+- `@`: Coincide literalmente con el carácter "@".
+- `[a-zA-Z0-9.-]+`: Coincide con uno o más caracteres alfanuméricos, ".", o "-" para representar el dominio.
+- `\.`: Coincide literalmente con el carácter ".".
+- `[a-zA-Z]{2,}`: Coincide con dos o más caracteres alfabéticos para representar la extensión del dominio.
+- `$`: Coincide con el final de la cadena.
+
+
+
+
 VENTAJAS VS DESVENTAJAS 
 
 
@@ -95,3 +206,4 @@ VENTAJAS VS DESVENTAJAS
 
 
 Puedes ir a la carpeta casos_practicos donde vas a ver algunas implementaciones
+Los ejemplos se abordan en los lenguajes de programación de JavaScript, Java, C#

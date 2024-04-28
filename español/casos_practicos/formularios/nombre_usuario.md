@@ -11,7 +11,7 @@ RegexUsername: /^[a-zA-Z0-9._-]{3,16}$/
 
 **JavaScript:**
 ```javascript
-let usernameRegex = /^[a-zA-Z0-9._-]{3,16}$/;
+const usernameRegex = /^[a-zA-Z0-9._-]{3,16}$/;
 
 // Ejemplo de uso:
 let username = "user123";

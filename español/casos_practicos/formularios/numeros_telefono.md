@@ -11,7 +11,7 @@ RegexPhoneNumber: /^\+?\d{1,3}[\s-]?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{4}$/
 
 **JavaScript:**
 ```javascript
-let phoneRegex = /^\+?\d{1,3}[\s-]?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{4}$/;
+const phoneRegex = /^\+?\d{1,3}[\s-]?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{4}$/;
 
 // Ejemplo de uso:
 let phoneNumber = "+1 (555) 123-4567";
